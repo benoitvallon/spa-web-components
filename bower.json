@@ -1,0 +1,22 @@
+{
+  "name": "spa-web-components",
+  "version": "0.0.1",
+  "homepage": "https://github.com/benoitvallon/spa-web-components",
+  "authors": [
+    "Benoit VALLON"
+  ],
+  "description": "Single Page App based on polymer web components",
+  "main": "index.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.4.2",
+    "core-elements": "Polymer/core-elements#~0.4.2"
+  }
+}
