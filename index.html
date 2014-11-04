@@ -21,42 +21,54 @@
 </head>
 
 <body unresolved fullbleed>
-  <core-scaffold id="scaffold">
+  <template is="auto-binding">
+    <core-scaffold id="scaffold">
 
-    <nav>
-      <core-toolbar><span>Single Page Polymer</span></core-toolbar>
-      <core-menu selected="0">
-        <paper-item icon="label-outline" label="Single">
-          <a href="#one"></a>
-        </paper-item>
-        <paper-item icon="label-outline" label="page">
-          <a href="#two"></a>
-        </paper-item>
-        ...
-      </core-menu>
-    </nav>
+      <nav>
+        <core-toolbar>
+          <span>Single Page Polymer</span>
+        </core-toolbar>
+        <core-menu valueattr="hash" selected="{{route}}">
+          <template repeat="{{page in pages}}">
+            <paper-item icon="label{{route != page.hash ? '-outline' : ''}}" label="{{page.name}}" hash="{{page.hash}}">
+              <a href="#{{page.hash}}"></a>
+            </paper-item>
+          </template>
+        </core-menu>
+      </nav>
 
-    <!-- flex makes the bar span across the top of the main content area -->
-    <core-toolbar tool flex>
-      <!-- flex spaces this element and jusifies the icons to the right-side -->
-      <div flex>Application</div>
-      <core-icon-button icon="refresh"></core-icon-button>
-      <core-icon-button icon="add"></core-icon-button>
-    </core-toolbar>
+      <!-- flex makes the bar span across the top of the main content area -->
+      <core-toolbar tool flex>
+        <!-- flex spaces this element and jusifies the icons to the right-side -->
+        <div flex>Application</div>
+        <core-icon-button icon="refresh"></core-icon-button>
+        <core-icon-button icon="add"></core-icon-button>
+      </core-toolbar>
 
-    <div layout horizontal center-center fit>
-      <core-animated-pages  selected="0" transitions="slide-from-right">
-        <section layout vertical center-center>
-          <div>Single</div>
-        </section>
-        <section layout vertical center-center>
-          <div>page</div>
-        </section>
-        ...
-      </core-animated-pages>
-    </div>
+      <div layout horizontal center-center fit>
+        <core-animated-pages valueattr="hash" selected="{{route}}" transitions="slide-from-right">
+          <template repeat="{{page in pages}}">
+            <section hash="{{page.hash}}" layout vertical center-center>
+              <div>{{page.name}}</div>
+            </section>
+          </template>
+        </core-animated-pages>
+      </div>
 
-  </core-scaffold>
+    </core-scaffold>
+  </template>
+
+<script>
+  var template = document.querySelector('template[is="auto-binding"]');
+  template.pages = [
+    {name: 'Single', hash: 'one'},
+    {name: 'page', hash: 'two'},
+    {name: 'app', hash: 'three'},
+    {name: 'using', hash: 'four'},
+    {name: 'Polymer', hash: 'five'},
+  ];
+</script>
+
 </body>
 
 </html>
