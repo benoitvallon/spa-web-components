@@ -17,8 +17,9 @@
   <link rel="import" href="components/core-icon-button/core-icon-button.html">
   <link rel="import" href="components/core-menu/core-menu.html">
   <link rel="import" href="components/paper-item/paper-item.html">
-  
+
   <link rel="import" href="components/flatiron-director/flatiron-director.html">
+  <link rel="import" href="components/core-a11y-keys/core-a11y-keys.html">
 
 </head>
 
@@ -28,13 +29,21 @@
     <!-- Route controller. -->
     <flatiron-director route="{{route}}" autoHash></flatiron-director>
 
+    <!-- Keyboard nav controller. -->
+    <core-a11y-keys id="keys" target="{{parentElement}}"
+        keys="up down left right space space+shift"
+        on-keys-pressed="{{keyHandler}}"></core-a11y-keys>
+
     <core-scaffold id="scaffold">
 
       <nav>
         <core-toolbar>
           <span>Single Page Polymer</span>
         </core-toolbar>
-        <core-menu valueattr="hash" selected="{{route}}">
+        <core-menu id="menu" valueattr="hash"
+                 selected="{{route}}"
+                 selectedModel="{{selectedPage}}"
+                 on-core-select="{{menuItemSelected}}">
           <template repeat="{{page in pages}}">
             <paper-item icon="label{{route != page.hash ? '-outline' : ''}}" label="{{page.name}}" hash="{{page.hash}}">
               <a href="#{{page.hash}}"></a>
@@ -46,13 +55,13 @@
       <!-- flex makes the bar span across the top of the main content area -->
       <core-toolbar tool flex>
         <!-- flex spaces this element and jusifies the icons to the right-side -->
-        <div flex>Application</div>
+        <div flex>{{selectedPage.page.name}}</div>
         <core-icon-button icon="refresh"></core-icon-button>
         <core-icon-button icon="add"></core-icon-button>
       </core-toolbar>
 
       <div layout horizontal center-center fit>
-        <core-animated-pages valueattr="hash" selected="{{route}}" transitions="slide-from-right">
+        <core-animated-pages id="pages" valueattr="hash" selected="{{route}}" transitions="slide-from-right">
           <template repeat="{{page in pages}}">
             <section hash="{{page.hash}}" layout vertical center-center>
               <div>{{page.name}}</div>
