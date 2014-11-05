@@ -17,11 +17,17 @@
   <link rel="import" href="components/core-icon-button/core-icon-button.html">
   <link rel="import" href="components/core-menu/core-menu.html">
   <link rel="import" href="components/paper-item/paper-item.html">
+  
+  <link rel="import" href="components/flatiron-director/flatiron-director.html">
 
 </head>
 
 <body unresolved fullbleed>
   <template is="auto-binding">
+
+    <!-- Route controller. -->
+    <flatiron-director route="{{route}}" autoHash></flatiron-director>
+
     <core-scaffold id="scaffold">
 
       <nav>
@@ -58,16 +64,7 @@
     </core-scaffold>
   </template>
 
-<script>
-  var template = document.querySelector('template[is="auto-binding"]');
-  template.pages = [
-    {name: 'Single', hash: 'one'},
-    {name: 'page', hash: 'two'},
-    {name: 'app', hash: 'three'},
-    {name: 'using', hash: 'four'},
-    {name: 'Polymer', hash: 'five'},
-  ];
-</script>
+  <script src="app-ajax.js"></script>
 
 </body>
 
