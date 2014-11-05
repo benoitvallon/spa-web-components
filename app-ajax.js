@@ -85,4 +85,12 @@ template.onResponse = function(e, detail, sender) {
   this.injectBoundHTML(html, pages.selectedItem.firstElementChild);
 };
 
+template.cyclePages = function(e, detail, sender) {
+  // If click was on a link, navigate and don't cycle page.
+  if (e.path[0].localName == 'a') {
+    return;
+  }
+  e.shiftKey ? sender.selectPrevious(true) : sender.selectNext(true);
+};
+
 })();
