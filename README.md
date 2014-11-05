@@ -1,12 +1,18 @@
 spa-web-components
 ==================
 
-# Launch a server
+Sample based on "Building single page apps using web components" from the polymer website
 
-## Python 2.x:
+## Launch a local server
 
+### Python 2.x:
+
+```
 python -m SimpleHTTPServer
+```
 
-## Python 3.x:
+### Python 3.x:
 
+```
 python -m http.server
+```
